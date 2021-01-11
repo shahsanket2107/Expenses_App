@@ -28,19 +28,21 @@ class MyHomePage extends StatelessWidget {
         title: 'First App',
         home: Scaffold(
             appBar: AppBar(
-              title: Text('First App'),
+              title: Text('Expenses App'),
             ),
             body: Column(children: <Widget>[
               Card(
                 child: Container(
                   child: Text('Chart!!'),
-                  width: 100,
+                  width: double.infinity,
                 ),
-                //color: Colors.blue,
+                color: Colors.blue,
                 elevation: 5,
               ),
-              Card(
-                child: Text('List of expenses!!'),
+              Column(
+                children: transactions.map((tx) {
+                  return Card(child: Text(tx.title));
+                }).toList(),
               )
             ])));
   }
