@@ -33,15 +33,53 @@ class MyHomePage extends StatelessWidget {
             body: Column(children: <Widget>[
               Card(
                 child: Container(
-                  child: Text('Chart!!'),
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Chart!!',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   width: double.infinity,
                 ),
-                color: Colors.blue,
+                color: Colors.greenAccent,
                 elevation: 5,
               ),
               Column(
                 children: transactions.map((tx) {
-                  return Card(child: Text(tx.title));
+                  return Card(
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 2.5, color: Colors.purple)),
+                          child: Text(tx.amount.toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.purple)),
+                          padding: EdgeInsets.all(10),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              tx.title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.deepOrangeAccent),
+                            ),
+                            Text(
+                              tx.time.toString(),
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.grey[900]),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  );
                 }).toList(),
               )
             ])));
