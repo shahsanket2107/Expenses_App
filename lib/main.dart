@@ -54,7 +54,7 @@ class MyHomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               border:
                                   Border.all(width: 2.5, color: Colors.purple)),
-                          child: Text(tx.amount.toString(),
+                          child: Text('Rs. ${tx.amount}',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -62,6 +62,7 @@ class MyHomePage extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                         ),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
                               tx.title,
@@ -73,7 +74,7 @@ class MyHomePage extends StatelessWidget {
                             Text(
                               tx.time.toString(),
                               style: TextStyle(
-                                  fontSize: 14, color: Colors.grey[900]),
+                                  fontSize: 14, color: Colors.grey[800]),
                             ),
                           ],
                         )
