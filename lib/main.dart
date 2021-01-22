@@ -18,10 +18,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   // String titleInput;
   // String amountInput;
-
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,20 +26,23 @@ class MyHomePage extends StatelessWidget {
             appBar: AppBar(
               title: Text('Expenses App'),
             ),
-            body: Column(children: <Widget>[
-              Card(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Text(
-                    'Chart!!',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            body: SingleChildScrollView(
+              child: Column(children: <Widget>[
+                Card(
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      'Chart!!',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    width: double.infinity,
                   ),
-                  width: double.infinity,
+                  color: Colors.greenAccent,
+                  elevation: 5,
                 ),
-                color: Colors.greenAccent,
-                elevation: 5,
-              ),
-              UserTransactions()
-            ])));
+                UserTransactions()
+              ]),
+            )));
   }
 }
