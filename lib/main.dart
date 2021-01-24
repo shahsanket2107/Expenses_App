@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Expenses App',
+      theme: ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.amber),
       home: MyHomePage(),
     );
   }
@@ -56,43 +57,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Expenses App',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Expenses App'),
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    return _startAddNewTransaction(context);
-                  })
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: Column(children: <Widget>[
-              Card(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Text(
-                    'Chart!!',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  width: double.infinity,
-                ),
-                color: Colors.greenAccent,
-                elevation: 5,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Expenses App'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                return _startAddNewTransaction(context);
+              })
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(children: <Widget>[
+          Card(
+            child: Container(
+              padding: EdgeInsets.all(5),
+              child: Text(
+                'Chart!!',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              TransactionList(_userTransaction),
-            ]),
+              width: double.infinity,
+            ),
+            color: Colors.greenAccent,
+            elevation: 5,
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          ),
-        ));
+          TransactionList(_userTransaction),
+        ]),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _startAddNewTransaction(context),
+      ),
+    );
   }
 }
