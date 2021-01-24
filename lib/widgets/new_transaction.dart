@@ -1,12 +1,30 @@
-import 'package:flutter/material.dart';
-import 'user_transaction.dart';
+import 'dart:html';
 
-class NewTransaction extends StatelessWidget {
+import 'package:flutter/material.dart';
+
+class NewTransaction extends StatefulWidget {
   final Function addTx;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
 
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
+  void submitData() {
+    final title = titleController.text;
+    final amount = double.parse(amountController.text);
+    if (title.isEmpty || amount <= 0) {
+      return;
+    }
+    widget.addTx(title, amount);
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +39,7 @@ class NewTransaction extends StatelessWidget {
               autofocus: true,
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
+              onSubmitted: (_) => submitData(),
               // onChanged: (val) {
               //   titleInput = val;
               // }
@@ -28,6 +47,8 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
               // onChanged: (val) {
               //   amountInput = val;
               // },
@@ -35,15 +56,13 @@ class NewTransaction extends StatelessWidget {
             RaisedButton(
                 child: Text('Add Transaction'),
                 textColor: Colors.blue[800],
-                onPressed: () {
-                  addTx(titleController.text,
-                      double.parse(amountController.text));
-                  // print(titleController.text);
-                  // print(amountController.text);
+                onPressed: submitData
+                // print(titleController.text);
+                // print(amountController.text);
 
-                  // print(titleInput);
-                  // print(amountInput);
-                })
+                // print(titleInput);
+                // print(amountInput);
+                )
           ],
         ),
       ),
