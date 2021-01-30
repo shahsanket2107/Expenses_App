@@ -2,6 +2,7 @@ import 'package:Expenses_App/widgets/new_transaction.dart';
 import 'package:Expenses_App/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import './models/transaction.dart';
+import './widgets/chart.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Expenses App',
+      title: 'MyExpenses',
       theme: ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.amber),
       home: MyHomePage(),
     );
@@ -34,6 +35,14 @@ class _MyHomePageState extends State<MyHomePage> {
     // Transaction(
     //     id: 't2', title: 'New mobile cover', amount: 500, time: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransaction.where((tx) {
+      return tx.time.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -59,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Expenses App'),
+        title: Text('MyExpenses'),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -70,18 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
-          Card(
-            child: Container(
-              padding: EdgeInsets.all(5),
-              child: Text(
-                'Chart!!',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              width: double.infinity,
-            ),
-            color: Colors.greenAccent,
-            elevation: 5,
-          ),
+          Chart(_recentTransactions),
           TransactionList(_userTransaction),
         ]),
       ),
